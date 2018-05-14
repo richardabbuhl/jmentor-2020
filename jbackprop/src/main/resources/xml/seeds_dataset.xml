@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<bpnetwork
+  version="0"
+  activ_func="2"
+  max_iterations="900000"
+  max_total_error="0.001000"
+  output_type="1"
+  iteration_print="1"
+  save_weights="1"
+  weight_path="weights"
+  momentum="0.500000"
+  bias="0.100000"
+  a1="0.050000"
+  a2="0.450000"
+  a3="0.980000"
+  random_init_val="13"
+  num_layers="3"
+  layer_size0="7"
+  layer_size1="8"
+  layer_size2="1">
+</bpnetwork> 
