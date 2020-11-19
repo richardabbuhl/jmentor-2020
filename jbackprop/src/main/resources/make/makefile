@@ -15,7 +15,7 @@ SRCOBJ = $(objdir)/mtrain.o $(objdir)/bpnetwork.o $(objdir)/cputime.o $(objdir)/
 NANOBJ = $(objdir)/XMLElement.o $(objdir)/XMLParseException.o
 GNUOBJ = $(objdir)/gnufix.o
 $(outdir)/jbackprop.exe:  $(SRCOBJ) $(NANOBJ) $(GNUOBJ)
-	gcj $(CFLAGS) --main=com.jmentor.jbackprop.mtrain -o $(outdir)/jbackprop.exe $(SRCOBJ) $(NANOBJ) $(GNUOBJ) -lm
+	gcj $(CFLAGS) --main=com.jmentor.jbackprop.MTrain -o $(outdir)/jbackprop.exe $(SRCOBJ) $(NANOBJ) $(GNUOBJ) -lm
 
 $(objdir)/mtrain.o:  $(srcdir)/mtrain.java
 	gcj -c $(CFLAGS) -o $@ $(srcdir)/mtrain.java

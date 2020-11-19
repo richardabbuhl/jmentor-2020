@@ -2,9 +2,9 @@
 
 package com.jmentor.jqlearn;
 
-import com.jmentor.jbackprop.decimalhelper;
+import com.jmentor.jbackprop.DecimalHelper;
 import com.jmentor.jtictactoe.*;
-import com.jmentor.jbackprop.cputime;
+import com.jmentor.jbackprop.CPUTime;
 import com.jmentor.jrandom.MersenneTwister;
 
 import java.text.DecimalFormat;
@@ -16,7 +16,7 @@ public class Teach extends Game {
    final double SCORETIE   = 0.0;
 
    QLearn qlearn;
-   cputime cpu;
+   CPUTime cpu;
    MersenneTwister rg;
    long elapsed_iters;
 
@@ -44,13 +44,13 @@ public class Teach extends Game {
 
    Train train;
 
-   static DecimalFormat decfmt1  = decimalhelper.defaultDecimalFormat("#00.00000");
-   static DecimalFormat decfmt2  = decimalhelper.defaultDecimalFormat("#00.00");
+   static DecimalFormat decfmt1  = DecimalHelper.defaultDecimalFormat("#00.00000");
+   static DecimalFormat decfmt2  = DecimalHelper.defaultDecimalFormat("#00.00");
 
    Teach()
    {
       qlearn = new QLearn();
-      cpu = new cputime();
+      cpu = new CPUTime();
       rg = new MersenneTwister(13);
       ClearScore();
       USE_MINIMAX = true;

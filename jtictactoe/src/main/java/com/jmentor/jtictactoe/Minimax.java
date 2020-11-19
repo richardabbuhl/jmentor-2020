@@ -1,6 +1,6 @@
 package com.jmentor.jtictactoe;
 
-import com.jmentor.jbackprop.decimalhelper;
+import com.jmentor.jbackprop.DecimalHelper;
 
 import java.text.DecimalFormat;
 
@@ -11,8 +11,8 @@ public class Minimax extends Player
    static double TWOS      = 0.3;
    static double BLOCKS    = 0.3;
    static double SCOREWIN  = 2.0;
-   static DecimalFormat decfmt  = decimalhelper.defaultDecimalFormat("#0.0000000");
-   static DecimalFormat decfmt2 = decimalhelper.defaultDecimalFormat("0.0000");
+   static DecimalFormat decfmt  = DecimalHelper.defaultDecimalFormat("#0.0000000");
+   static DecimalFormat decfmt2 = DecimalHelper.defaultDecimalFormat("0.0000");
    
    class nodetype {
       int [] board;
@@ -615,7 +615,7 @@ public class Minimax extends Player
       int Num_Ties = 0;
       Board board = new Board();
       Random random = new Random();
-      DecimalFormat decfmt  = decimalhelper.defaultDecimalFormat("#0.0000000");
+      DecimalFormat decfmt  = DecimalHelper.defaultDecimalFormat("#0.0000000");
    
       for (int i = 0; i < 10000; i++) {
 

@@ -18,7 +18,7 @@
 package com.jmentor.jbackprop;
 
 /* Define a network record */
-public class networkrec {
+public class NetworkRecord {
 
    /* Misc defines for return values */
    static int  M_ERROR  =  -1;

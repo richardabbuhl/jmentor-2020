@@ -2,7 +2,7 @@
 
 package com.jmentor.jqlearn;
 
-import com.jmentor.jbackprop.decimalhelper;
+import com.jmentor.jbackprop.DecimalHelper;
 import com.jmentor.jtictactoe.Player;
 import com.jmentor.jtictactoe.Random;
 import com.jmentor.jtictactoe.Board;
@@ -24,7 +24,7 @@ public class QLearn extends Player {
    Random random;
    MersenneTwister rg;
 
-   static DecimalFormat decfmt  = decimalhelper.defaultDecimalFormat("#0.0000000");
+   static DecimalFormat decfmt  = DecimalHelper.defaultDecimalFormat("#0.0000000");
 
    public QLearn()
    {

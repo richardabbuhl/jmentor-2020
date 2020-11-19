@@ -6,7 +6,7 @@ import java.text.DecimalFormatSymbols;
 /**
  * Created by fv73ro on 6-2-2017.
  */
-public class decimalhelper {
+public class DecimalHelper {
 
     public static DecimalFormat defaultDecimalFormat(final String pattern) {
         DecimalFormat decimalFormat = new DecimalFormat(pattern);

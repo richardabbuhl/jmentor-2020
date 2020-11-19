@@ -19,17 +19,17 @@ package com.jmentor.jbackprop;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import com.jmentor.jbackprop.networkrec;
+
 import com.jmentor.jnanoxml.*;
 
-public class network {
+public class Network {
 
    /* Misc defines for printing */
-   static DecimalFormat intfmt = decimalhelper.defaultDecimalFormat("00");
-   static DecimalFormat decfmt = decimalhelper.defaultDecimalFormat("#0.0000000");
+   static DecimalFormat intfmt = DecimalHelper.defaultDecimalFormat("00");
+   static DecimalFormat decfmt = DecimalHelper.defaultDecimalFormat("#0.0000000");
 
-   int rec_terminate = networkrec.FALSE;
-   int VERBOSE = networkrec.FALSE;
+   int rec_terminate = NetworkRecord.FALSE;
+   int VERBOSE = NetworkRecord.FALSE;
 
    /* Values used to define the range for initializing
       the weights.  The weights are set using the
@@ -92,7 +92,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SetNumberPatterns( networkrec net, int numpat )
+   void SetNumberPatterns(NetworkRecord net, int numpat )
    {
       net.num_patterns = numpat;
    }
@@ -113,7 +113,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   int Allocate_Network( networkrec net )
+   int Allocate_Network( NetworkRecord net )
    {
       int num_layers_m1;
       int i;
@@ -160,7 +160,7 @@ public class network {
       net.weight = new double[net.num_weights];
       if (net.weight == null) {
          System.out.println("error allocating " + net.num_weights + "weight");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /**********************************/
@@ -172,7 +172,7 @@ public class network {
       net.old_weight = new double[net.num_weights];
       if (net.old_weight == null) {
          System.out.println("error allocating " + net.num_weights + " old_weight");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /*****************************/
@@ -185,7 +185,7 @@ public class network {
       net.error = new double[net.num_error];
       if (net.error == null) {
          System.out.println("error allocating " + net.num_error + " error");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /****************************/
@@ -198,7 +198,7 @@ public class network {
       net.bias = new double[net.num_bias];
       if (net.bias == null) {
          System.out.println("error allocating " + net.num_bias + " bias");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /********************************/
@@ -210,7 +210,7 @@ public class network {
       net.old_bias = new double[net.num_bias];
       if (net.old_bias == null) {
          System.out.println("error allocating " + net.num_bias + " old_bias\n");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /**************************************/
@@ -220,10 +220,10 @@ public class network {
       net.num_desired = net.y_layer_size[num_layers_m1] + 1;
 
       /* Return ok */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
-   int Allocate_Patterns( networkrec net )
+   int Allocate_Patterns( NetworkRecord net )
    {
       int num_layers_m1;
 
@@ -238,7 +238,7 @@ public class network {
       net.def_input = new double[net.num_patterns * net.num_input];
       if (net.def_input == null) {
          System.out.println("error allocating " + net.num_input + " def_input");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /**********************************/
@@ -248,7 +248,7 @@ public class network {
       net.activation = new double[net.num_input];
       if (net.activation == null) {
          System.out.println("error allocating " + net.num_input + " def_input");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
 
@@ -276,7 +276,7 @@ public class network {
       net.def_output = new double[net.num_patterns * net.num_output];
       if (net.def_output == null) {
          System.out.println("error allocating " + net.num_output + " def_output");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /**************************************/
@@ -286,7 +286,7 @@ public class network {
       net.desired_output = new double[net.num_output];
       if (net.desired_output == null) {
          System.out.println("error allocating " + net.num_output + " def_output");
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       //#ifdef IGNORETHIS
@@ -303,7 +303,7 @@ public class network {
       //#endif
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -311,7 +311,7 @@ public class network {
    * Free_Network -
    *
    --------------------------------------------------------*/
-   void Free_Network( networkrec net )
+   void Free_Network( NetworkRecord net )
    {
       /******************************/
       /* Allocate memory for weight */
@@ -364,7 +364,7 @@ public class network {
    * Free_Patterns -
    *
    --------------------------------------------------------*/
-   void Free_Patterns( networkrec net )
+   void Free_Patterns( NetworkRecord net )
    {
       /*****************************/
       /* Free memory for def_input */
@@ -401,7 +401,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   void WriteHeader( networkrec net , DataOutputStream file )
+   void WriteHeader(NetworkRecord net , DataOutputStream file )
    {
       int version = FORMAT_VERSION;
       java.util.Date tmpDate = new java.util.Date();
@@ -501,7 +501,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   void WriteWeights( networkrec net , DataOutputStream file )
+   void WriteWeights(NetworkRecord net , DataOutputStream file )
    {
       try {
 
@@ -552,7 +552,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   void WriteBias( networkrec net, DataOutputStream file )
+   void WriteBias(NetworkRecord net, DataOutputStream file )
    {
       try {
 
@@ -604,7 +604,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   int SaveWeights( networkrec net, String filename )
+   int SaveWeights(NetworkRecord net, String filename )
    {
       /**********************************************/
       /* Open the file which configures the network */
@@ -642,11 +642,11 @@ public class network {
       } catch (IOException e) {
          System.out.println( "Could not open weights file '%s' for writing\n" + net.WEIGHT_PATH );
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*********************************************************
@@ -665,7 +665,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   int ReadHeader( networkrec net, DataInputStream file )
+   int ReadHeader(NetworkRecord net, DataInputStream file )
    {
       int version;
       String tmpstring = new String();
@@ -686,7 +686,7 @@ public class network {
       if (PRINT_IO > 0) System.out.println("format version = " + version);
       if (version != FORMAT_VERSION) {
          System.out.println("Incompatible weight version " + version);
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /****************************/
@@ -724,9 +724,9 @@ public class network {
       /*****************************/
 
       net.num_layers = readInt(file);
-      if (net.num_layers < 0 || net.num_layers > networkrec.MAX_LAYERS) {
+      if (net.num_layers < 0 || net.num_layers > NetworkRecord.MAX_LAYERS) {
          System.out.println ("Number of layers not specifed" );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
       if (PRINT_IO > 0) System.out.println("number of layers = " + net.num_layers);
 
@@ -734,7 +734,7 @@ public class network {
       /* Read the layer configuration file */
       /*************************************/
 
-      for (int i = 0; i < networkrec.MAX_LAYERS; i++) {
+      for (int i = 0; i < NetworkRecord.MAX_LAYERS; i++) {
          net.layer_size[i] = 0;
          net.x_layer_size[i] = 0;
          net.y_layer_size[i] = 0;
@@ -744,14 +744,14 @@ public class network {
          net.x_layer_size[i] = readInt(file);
          if (net.x_layer_size[i] < 0) {
             System.out.println ("x_layer_size " + i + " not specifed");
-            return( networkrec.M_ERROR );
+            return( NetworkRecord.M_ERROR );
          }
          if (PRINT_IO > 0) System.out.println("x_layer " + i + " = " + net.x_layer_size[i] + "  ");
 
          net.y_layer_size[i] = readInt(file);
          if (net.y_layer_size[i] < 0) {
             System.out.println ("y_layer_size " + i + " not specifed");
-            return( networkrec.M_ERROR );
+            return( NetworkRecord.M_ERROR );
          }
          if (PRINT_IO > 0) System.out.println("y_layer " + i + " = " + net.y_layer_size[i] + "  ");
 
@@ -762,11 +762,11 @@ public class network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*********************************************************
@@ -784,7 +784,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   void ReadWeights( networkrec net, DataInputStream file )
+   void ReadWeights(NetworkRecord net, DataInputStream file )
    {
       /******************/
       /* Print a header */
@@ -831,7 +831,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   void ReadBias( networkrec net, DataInputStream file )
+   void ReadBias(NetworkRecord net, DataInputStream file )
    {
       /******************/
       /* Print a header */
@@ -876,7 +876,7 @@ public class network {
    *   None
    *
    *********************************************************/
-   int RetrieveWeightsHeader( networkrec net, String filename )
+   int RetrieveWeightsHeader(NetworkRecord net, String filename )
    {
       try {
 
@@ -906,11 +906,11 @@ public class network {
       } catch (IOException e) {
          System.out.println( "Could not open weights file " + net.WEIGHT_PATH );
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*********************************************************
@@ -928,10 +928,10 @@ public class network {
    *   None
    *
    *********************************************************/
-   int RetrieveWeights( networkrec net, String filename )
+   int RetrieveWeights(NetworkRecord net, String filename )
    {
       int result;
-      networkrec temp_net = new networkrec();
+      NetworkRecord temp_net = new NetworkRecord();
 
       try {
 
@@ -972,11 +972,11 @@ public class network {
       } catch (IOException e) {
          System.out.println( "Could not open weights file " + net.WEIGHT_PATH );
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*********************************************************
@@ -994,7 +994,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   int Init_Weights( networkrec net )
+   int Init_Weights( NetworkRecord net )
    {
       int i;
       double [] w = net.weight;
@@ -1014,7 +1014,7 @@ public class network {
          b[i] = bias_init_val1 * (randomval - bias_init_val2);
          ob[i] = b[i];
       }
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*********************************************************
@@ -1032,7 +1032,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintWeights( networkrec net )
+   void PrintWeights( NetworkRecord net )
    {
       int i;
       double [] w = net.weight;
@@ -1058,7 +1058,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintBias( networkrec net )
+   void PrintBias( NetworkRecord net )
    {
       int i;
       double [] b = net.bias;
@@ -1086,7 +1086,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintActivation( networkrec net )
+   void PrintActivation( NetworkRecord net )
    {
       int i;
       double [] a = net.activation;
@@ -1111,7 +1111,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintError( networkrec net )
+   void PrintError( NetworkRecord net )
    {
       int i;
       double [] e = net.error;
@@ -1138,7 +1138,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SetInputNum( networkrec net, int num )
+   void SetInputNum(NetworkRecord net, int num )
    {
       System.arraycopy( net.def_input, num * net.num_input,
         net.activation, 0, net.num_input );
@@ -1160,7 +1160,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SetDesiredOutputNum( networkrec net, int num )
+   void SetDesiredOutputNum(NetworkRecord net, int num )
    {
       System.arraycopy( net.def_output, num * net.num_output,
         net.desired_output, 0, net.num_output );
@@ -1181,7 +1181,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintInput( networkrec net )
+   void PrintInput( NetworkRecord net )
    {
       int i;
       int amin = net.x_layer_size[0];
@@ -1209,7 +1209,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintDesiredOutput( networkrec net )
+   void PrintDesiredOutput( NetworkRecord net )
    {
       int i;
       int nl_m1 = net.num_layers - 1;
@@ -1237,7 +1237,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintOutput( networkrec net )
+   void PrintOutput( NetworkRecord net )
    {
       int i;
       int nl_m1 = net.num_layers - 1;
@@ -1265,7 +1265,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void PrintOutput2( networkrec net )
+   void PrintOutput2( NetworkRecord net )
    {
       int i;
       int nl_m1 = net.num_layers - 1;
@@ -1294,7 +1294,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void DisplayParams( networkrec net )
+   void DisplayParams( NetworkRecord net )
    {
       // System.out.println("-------------------------------------\n");
       // System.out.println("A1 = %f\n",net.A1);
@@ -1355,7 +1355,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SetLearningRate( networkrec net, long iteration )
+   void SetLearningRate(NetworkRecord net, long iteration )
    {
       net.weight_lrate = net.A1 + (net.A2 * power(net.A3, iteration));
    }
@@ -1376,7 +1376,7 @@ public class network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   double Compute_Error( networkrec net )
+   double Compute_Error( NetworkRecord net )
    {
       int i;
       int nl_m1 = net.num_layers - 1;
@@ -1397,13 +1397,13 @@ public class network {
    * Create_Network_Rec -
    *
    --------------------------------------------------------*/
-   networkrec Create_Network_Rec( int hHandle )
+   NetworkRecord Create_Network_Rec(int hHandle )
    {
-      networkrec net;
+      NetworkRecord net;
 
       /* Allocate a network record */
       //net = (NETWORK_REC *) MYALLOC( hHandle, (INT)1, (INT)sizeof( NETWORK_REC ) );
-      net = new networkrec();
+      net = new NetworkRecord();
 
       /* Set to basic values */
       if (net != null) {
@@ -1419,18 +1419,18 @@ public class network {
    * Init_Network_Rec -
    *
    --------------------------------------------------------*/
-   void Init_Network_Rec( networkrec net )
+   void Init_Network_Rec( NetworkRecord net )
    {
       /* Set the default output files */
       net.pattern_file = null;
-      net.use_pattern_file = networkrec.FALSE;
+      net.use_pattern_file = NetworkRecord.FALSE;
 
       /* Set some defaults */
-      net.MEMTEST = networkrec.FALSE;
-      net.DISPLAY_NTF_IO = networkrec.FALSE;
-      net.DISPLAY_PAT_IO = networkrec.FALSE;
-      net.DISPLAY_NET_IO = networkrec.FALSE;
-      net.RESTART_TRAINING = networkrec.FALSE;
+      net.MEMTEST = NetworkRecord.FALSE;
+      net.DISPLAY_NTF_IO = NetworkRecord.FALSE;
+      net.DISPLAY_PAT_IO = NetworkRecord.FALSE;
+      net.DISPLAY_NET_IO = NetworkRecord.FALSE;
+      net.RESTART_TRAINING = NetworkRecord.FALSE;
       net.num_patterns = 0;
 
       net.version = 2;
@@ -1441,8 +1441,8 @@ public class network {
       net.momentum_lrate = 0.1;
       net.bias_lrate = 0.1;
       net.start_iter = 0;
-      net.activ_func = networkrec.HYPERBOLIC;
-      net.OUTPUT_TYPE = networkrec.NETWORK_OUTPUT;
+      net.activ_func = NetworkRecord.HYPERBOLIC;
+      net.OUTPUT_TYPE = NetworkRecord.NETWORK_OUTPUT;
 
       net.MAX_ITERATIONS = 10000;
       net.MAX_TOTAL_ERROR = 0.01;
@@ -1469,7 +1469,7 @@ public class network {
    * Free_Network_Rec -
    *
    --------------------------------------------------------*/
-   void Free_Network_Rec( networkrec net, int hHandle )
+   void Free_Network_Rec(NetworkRecord net, int hHandle )
    {
       /* Free the network record */
       if (net != null) {
@@ -1483,14 +1483,14 @@ public class network {
    * Set_Layer_Info
    *
    --------------------------------------------------------------------*/
-   int Set_Layer_Info( networkrec net, int num_layers,
-         int layer_1, int layer_2, int layer_3, int layer_4, int layer_5 )
+   int Set_Layer_Info(NetworkRecord net, int num_layers,
+                      int layer_1, int layer_2, int layer_3, int layer_4, int layer_5 )
    {
       int i;
       int num_layers_m1;
 
       if (net == null) {
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       net.num_layers = num_layers;
@@ -1520,7 +1520,7 @@ public class network {
       net.noutputs = net.layer_size[num_layers_m1];
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -1528,13 +1528,13 @@ public class network {
    * Random_Init - init the random seed.
    *
    --------------------------------------------------------*/
-   int Random_Init( networkrec net )
+   int Random_Init( NetworkRecord net )
    {
       /* Initialize the random seed */
       drand48 = new java.util.Random( net.RANDOM_INIT_VAL );
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*-----------------------------------------------------------
@@ -1546,7 +1546,7 @@ public class network {
    int MTime_Stamp( long tval )
    {
       //time( tval );
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
 
@@ -1566,7 +1566,7 @@ public class network {
    //   long mins  = (tval % aa) / bb;
    //   long secs  = (tval % aa) % bb;
    //   sprintf( elapsed_string,"%ld:%02ld:%02ld\n",hours,mins,secs);
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    int readInt(DataInputStream file)
@@ -1670,7 +1670,7 @@ public class network {
    * Read_NTF_File
    *
    --------------------------------------------------------*/
-   int Read_NTF_File( networkrec net, String filename )
+   int Read_NTF_File(NetworkRecord net, String filename )
    {
       int wlen;
       int num_layers_m1;
@@ -1779,11 +1779,11 @@ public class network {
       catch (Exception e)
       {
          System.out.println(e.toString());
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -1791,7 +1791,7 @@ public class network {
    * Read_XML_NTF_File
    *
    --------------------------------------------------------*/
-   int Read_XML_NTF_File( networkrec net, String filename )
+   int Read_XML_NTF_File(NetworkRecord net, String filename )
    {
      try {
        // Request document building without validation
@@ -1808,7 +1808,7 @@ public class network {
    //    System.out.println( root.getName().length() );
        if (!elemName.equals("bpnetwork")) {
           System.out.println("document of the wrong type, root node != bpnetwork");
-          return( networkrec.M_ERROR );
+          return( NetworkRecord.M_ERROR );
        }
 
        /* Read the ntf version indicator */
@@ -1898,11 +1898,11 @@ public class network {
        net.noutputs = net.layer_size[num_layers_m1];
 
        /* Return OK */
-       return( networkrec.M_OK );
+       return( NetworkRecord.M_OK );
 
      } catch (Exception e) {
        System.out.println(e.toString());
-       return( networkrec.M_ERROR );
+       return( NetworkRecord.M_ERROR );
      }
    }
 
@@ -1911,7 +1911,7 @@ public class network {
    * Write_NTF_File
    *
    --------------------------------------------------------*/
-   int Write_NTF_File( networkrec net, String filename )
+   int Write_NTF_File(NetworkRecord net, String filename )
    {
       try {
 
@@ -2006,11 +2006,11 @@ public class network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -2018,8 +2018,8 @@ public class network {
    * Scan_Pattern_File
    *
    --------------------------------------------------------*/
-   int Scan_Pattern_File( networkrec net, String filename,
-          int contains_desired, int [] num_read )
+   int Scan_Pattern_File(NetworkRecord net, String filename,
+                         int contains_desired, int [] num_read )
    {
       /* Open the pattern file */
       try {
@@ -2043,12 +2043,12 @@ public class network {
                   } else {
                      buff.close();
                      num_read[0] = npatterns;
-                     return( networkrec.M_OK );
+                     return( NetworkRecord.M_OK );
                   }
                } catch (EOFException eof) {
                   buff.close();
                   num_read[0] = npatterns;
-                  return( networkrec.M_OK );
+                  return( NetworkRecord.M_OK );
                }
             }
 
@@ -2062,12 +2062,12 @@ public class network {
                      } else {
                         buff.close();
                         num_read[0] = npatterns;
-                        return( networkrec.M_OK );
+                        return( NetworkRecord.M_OK );
                      }
                   } catch (EOFException eof) {
                      buff.close();
                      num_read[0] = npatterns;
-                     return( networkrec.M_OK );
+                     return( NetworkRecord.M_OK );
                   }
                }
             }
@@ -2078,7 +2078,7 @@ public class network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
    }
 
@@ -2087,7 +2087,7 @@ public class network {
    * Read_Pattern_File
    *
    --------------------------------------------------------*/
-   public int Read_Pattern_File( networkrec net, String filename, int contains_desired )
+   public int Read_Pattern_File(NetworkRecord net, String filename, int contains_desired )
    {
       /* Open the pattern file */
       try {
@@ -2110,7 +2110,7 @@ public class network {
                      net.def_input[(i * net.num_input) + j] = value;
                   } else {
                      buff.close();
-                     return( networkrec.M_OK );
+                     return( NetworkRecord.M_OK );
                   }
 
                   if (net.DISPLAY_PAT_IO > 0) {
@@ -2121,7 +2121,7 @@ public class network {
 
                } catch (EOFException eof) {
                   buff.close();
-                  return( networkrec.M_OK );
+                  return( NetworkRecord.M_OK );
                }
             }
 
@@ -2137,11 +2137,11 @@ public class network {
                                net.x_layer_size[net.num_layers - 1] + j] = value;
                      } else {
                         buff.close();
-                        return( networkrec.M_OK );
+                        return( NetworkRecord.M_OK );
                      }
                   } catch (EOFException eof) {
                      buff.close();
-                     return( networkrec.M_OK );
+                     return( NetworkRecord.M_OK );
                   }
                   if (net.DISPLAY_PAT_IO > 0) {
                      int x = (i * net.num_output) + net.x_layer_size[net.num_layers - 1] + j;
@@ -2157,11 +2157,11 @@ public class network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -2169,7 +2169,7 @@ public class network {
    * MWrite_Pattern_File
    *
    --------------------------------------------------------*/
-   int Write_Pattern_File( networkrec net, String filename, int contains_desired )
+   int Write_Pattern_File(NetworkRecord net, String filename, int contains_desired )
    {
       try {
 
@@ -2202,11 +2202,11 @@ public class network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -2233,7 +2233,7 @@ public class network {
    //      }
    //   }
    //   #endif
-      return( networkrec.FALSE );
+      return( NetworkRecord.FALSE );
    }
 
    /*--------------------------------------------------------
@@ -2242,7 +2242,7 @@ public class network {
    *                    the highest score.
    *
    --------------------------------------------------------*/
-   int max_output_index( networkrec net )
+   int max_output_index( NetworkRecord net )
    {
       int i,j = 0;
       int nl_m1 = net.num_layers - 1;
@@ -2263,7 +2263,7 @@ public class network {
       return( index );
    }
 
-   void Printf_Output2( BufferedWriter buff, networkrec net )
+   void Printf_Output2( BufferedWriter buff, NetworkRecord net )
      throws java.io.IOException
    {
       int nl_m1 = net.num_layers - 1;

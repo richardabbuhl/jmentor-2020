@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.jmentor.jtictactoegui.tictactest</mainClass>
+                            <mainClass>com.jmentor.jtictactoegui.TicTacTest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

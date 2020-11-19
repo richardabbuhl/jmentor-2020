@@ -52,13 +52,13 @@ package com.jmentor.jbackprop;
 
 import java.text.DecimalFormat;
 
-public class cputime {
+public class CPUTime {
 
    static double CLOCK_TICKS_PER_SECOND = 1e-3;
    static double tbufa = 0;
    static double tbufb = 0;
-   static DecimalFormat intfmt = decimalhelper.defaultDecimalFormat("00");
-   static DecimalFormat decfmt = decimalhelper.defaultDecimalFormat("#0.0000000");
+   static DecimalFormat intfmt = DecimalHelper.defaultDecimalFormat("00");
+   static DecimalFormat decfmt = DecimalHelper.defaultDecimalFormat("#0.0000000");
 
    /*-----------------------------------------------------------
    *

@@ -21,29 +21,25 @@
 
 package com.jmentor.jbackprop;
 
-import com.jmentor.jbackprop.networkrec;
-import com.jmentor.jbackprop.bpnetwork;
-import com.jmentor.jbackprop.cputime;
-
 /*--------------------------------------------------------
 *
 * main - driver for the train program.
 *
 --------------------------------------------------------*/
-public class mtrain {
+public class MTrain {
 
-   static int TEST_NETWORK = networkrec.FALSE;
-   static int APPLY_NETWORK = networkrec.FALSE;
-   static int VERBOSE = networkrec.FALSE;
-   static int CONTAINS_DESIRED = networkrec.TRUE;
-   static int XML_DESIRED = networkrec.TRUE;
+   static int TEST_NETWORK = NetworkRecord.FALSE;
+   static int APPLY_NETWORK = NetworkRecord.FALSE;
+   static int VERBOSE = NetworkRecord.FALSE;
+   static int CONTAINS_DESIRED = NetworkRecord.TRUE;
+   static int XML_DESIRED = NetworkRecord.TRUE;
    static String ntf_file;
 
    public static void main(String[] args)
    {
-      networkrec net = new networkrec();
-      bpnetwork bpnet = new bpnetwork();
-      cputime cpu = new cputime();
+      NetworkRecord net = new NetworkRecord();
+      BPNetwork bpnet = new BPNetwork();
+      CPUTime cpu = new CPUTime();
       long [] elapsed_iters = new long[1];
       long start,end;
       double train_time;
@@ -152,7 +148,7 @@ public class mtrain {
       if (TEST_NETWORK > 0) {
          System.out.println("Testing network...\n");
          bpnet.TestNetwork( net, rms_error );
-         System.out.println("RMS Error = " + bpnetwork.decfmt.format(rms_error[0]) );
+         System.out.println("RMS Error = " + BPNetwork.decfmt.format(rms_error[0]) );
          System.exit( 0 );
       }
 
@@ -226,7 +222,7 @@ public class mtrain {
    * get_options - get the command line options.
    *
    -------------------------------------------------------------*/
-   static boolean get_options( String[] args, networkrec net )
+   static boolean get_options( String[] args, NetworkRecord net )
    {
       /*
        * Parse command line arguments.
@@ -240,36 +236,36 @@ public class mtrain {
            //   net.MEMTEST = networkrec.TRUE;
 
            if (args[arg].equals("-1"))
-              net.DISPLAY_NTF_IO = networkrec.TRUE;
+              net.DISPLAY_NTF_IO = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-2"))
-              net.DISPLAY_PAT_IO = networkrec.TRUE;
+              net.DISPLAY_PAT_IO = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-3"))
-              net.DISPLAY_NET_IO = networkrec.TRUE;
+              net.DISPLAY_NET_IO = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-p")) {
               /* Set the pattern filename */
               net.pattern_file = args[++arg];
-              net.use_pattern_file = networkrec.TRUE;
+              net.use_pattern_file = NetworkRecord.TRUE;
 
            } else if (args[arg].equals("-r"))
-              net.RESTART_TRAINING = networkrec.TRUE;
+              net.RESTART_TRAINING = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-s"))
-              net.RESTART_TRAINING = networkrec.FALSE;
+              net.RESTART_TRAINING = NetworkRecord.FALSE;
 
            else if (args[arg].equals("-t"))
-              TEST_NETWORK = networkrec.TRUE;
+              TEST_NETWORK = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-a"))
-              APPLY_NETWORK = networkrec.TRUE;
+              APPLY_NETWORK = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-v"))
-              VERBOSE = networkrec.TRUE;
+              VERBOSE = NetworkRecord.TRUE;
 
            else if (args[arg].equals("-x"))
-              CONTAINS_DESIRED = networkrec.FALSE;
+              CONTAINS_DESIRED = NetworkRecord.FALSE;
 
            // else if (args[arg].equals("-X"))
            // XML_DESIRED = networkrec.TRUE;

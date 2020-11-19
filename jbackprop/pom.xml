@@ -27,7 +27,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.jmentor.jbackprop.mtrain</mainClass>
+                            <mainClass>com.jmentor.jbackprop.MTrain</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

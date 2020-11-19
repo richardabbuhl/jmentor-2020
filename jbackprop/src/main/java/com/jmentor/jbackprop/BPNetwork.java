@@ -81,9 +81,9 @@ package com.jmentor.jbackprop;
 import java.io.*;
 import java.text.DecimalFormat;
 
-public class bpnetwork extends network {
+public class BPNetwork extends Network {
 
-   static DecimalFormat decfmt = decimalhelper.defaultDecimalFormat("#0.0000000");
+   static DecimalFormat decfmt = DecimalHelper.defaultDecimalFormat("#0.0000000");
 
    /*********************************************************
    *                                                        *
@@ -101,7 +101,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   double Compute_Error( networkrec net )
+   double Compute_Error( NetworkRecord net )
    {
       int i;
       int nl_m1 = net.num_layers - 1;
@@ -133,7 +133,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SigmoidComputeOutput( networkrec net )
+   void SigmoidComputeOutput( NetworkRecord net )
    {
       int i,j,l;
       double [] b = net.bias;
@@ -173,7 +173,7 @@ public class bpnetwork extends network {
    *   double Sigmoid(x)                                    *
    *                                                        *
    *********************************************************/
-   double Sigmoid( networkrec net, double x )
+   double Sigmoid(NetworkRecord net, double x )
    {
        if (x > 15.5) {
           return(.99999988); }
@@ -199,7 +199,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SigmoidComputeBP( networkrec net )
+   void SigmoidComputeBP( NetworkRecord net )
    {
       int i,j;
       int nl_m1 = net.num_layers - 1;
@@ -282,7 +282,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void SigmoidComputeBP2( networkrec net, int nlayers )
+   void SigmoidComputeBP2(NetworkRecord net, int nlayers )
    {
       int i,j,k;
       int nl_m1 = nlayers - 1;
@@ -382,7 +382,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void HyperbolicComputeOutput( networkrec net )
+   void HyperbolicComputeOutput( NetworkRecord net )
    {
       int i,j,l;
       double [] b = net.bias;
@@ -465,7 +465,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void HyperbolicComputeBP( networkrec net )
+   void HyperbolicComputeBP( NetworkRecord net )
    {
       int i,j;
       int nl_m1 = net.num_layers - 1;
@@ -548,7 +548,7 @@ public class bpnetwork extends network {
    *   None                                                 *
    *                                                        *
    *********************************************************/
-   void HyperbolicComputeBP2( networkrec net, int nlayers )
+   void HyperbolicComputeBP2(NetworkRecord net, int nlayers )
    {
       int i,j,k;
       int nl_m1 = nlayers - 1;
@@ -637,22 +637,22 @@ public class bpnetwork extends network {
    * ComputeNetworkOutput - compute the output from a network.
    *
    --------------------------------------------------------*/
-   int ComputeNetworkOutput( networkrec net )
+   int ComputeNetworkOutput( NetworkRecord net )
    {
       /* Check for a valid pointer */
       if (net == null) {
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Compute the network output */
-      if (net.activ_func == networkrec.SIGMOID) {
+      if (net.activ_func == NetworkRecord.SIGMOID) {
          SigmoidComputeOutput( net );
       } else {
          HyperbolicComputeOutput( net );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
    /*--------------------------------------------------------
@@ -660,7 +660,7 @@ public class bpnetwork extends network {
    * TrainNetwork - train the network until the stopping criterion.
    *
    --------------------------------------------------------*/
-   void TrainNetwork( networkrec net, long [] elapsed_iters )
+   void TrainNetwork(NetworkRecord net, long [] elapsed_iters )
    {
       long iter;
       int j;
@@ -677,7 +677,7 @@ public class bpnetwork extends network {
             SetInputNum( net, j );
             SetDesiredOutputNum( net, j );
 
-            if (net.activ_func == networkrec.SIGMOID) {
+            if (net.activ_func == NetworkRecord.SIGMOID) {
                SigmoidComputeOutput( net );
                SigmoidComputeBP( net );
             } else {
@@ -714,7 +714,7 @@ public class bpnetwork extends network {
    * TrainNetworkOnePass - train the network for one pass.
    *
    --------------------------------------------------------*/
-   void TrainNetworkOnePass( networkrec net, long start_iter, double [] total_error )
+   void TrainNetworkOnePass(NetworkRecord net, long start_iter, double [] total_error )
    {
       int j;
       double pattern_error = 0.0;
@@ -737,7 +737,7 @@ public class bpnetwork extends network {
          SetInputNum( net, j );
          SetDesiredOutputNum( net, j );
 
-         if (net.activ_func == networkrec.SIGMOID) {
+         if (net.activ_func == NetworkRecord.SIGMOID) {
             SigmoidComputeOutput( net );
             SigmoidComputeBP( net );
          } else {
@@ -761,7 +761,7 @@ public class bpnetwork extends network {
    * TestNetwork - test the network and return the rms error.
    *
    --------------------------------------------------------*/
-   void TestNetwork( networkrec net, double [] rms_error )
+   void TestNetwork(NetworkRecord net, double [] rms_error )
    {
       int j;
       double pattern_error = 0.0;
@@ -772,7 +772,7 @@ public class bpnetwork extends network {
          SetInputNum( net, j );
          SetDesiredOutputNum( net, j );
 
-         if (net.activ_func == networkrec.SIGMOID) {
+         if (net.activ_func == NetworkRecord.SIGMOID) {
             SigmoidComputeOutput( net );
          } else {
             HyperbolicComputeOutput( net );
@@ -796,7 +796,7 @@ public class bpnetwork extends network {
    * ApplyNetwork - apply the network and write result to a file.
    *
    --------------------------------------------------------*/
-   int ApplyNetwork( networkrec net, String filename )
+   int ApplyNetwork(NetworkRecord net, String filename )
    {
       int j;
       int index;
@@ -810,7 +810,7 @@ public class bpnetwork extends network {
 
             SetInputNum( net, j );
 
-            if (net.activ_func == networkrec.SIGMOID) {
+            if (net.activ_func == NetworkRecord.SIGMOID) {
                SigmoidComputeOutput( net );
             } else {
                HyperbolicComputeOutput( net );
@@ -821,7 +821,7 @@ public class bpnetwork extends network {
                PrintOutput( net );
             }
 
-            if (net.OUTPUT_TYPE == networkrec.MAX_OUTPUT_IDX) {
+            if (net.OUTPUT_TYPE == NetworkRecord.MAX_OUTPUT_IDX) {
                /* Find the index of the max output value */
                index = max_output_index( net );
                buff.write( index );
@@ -836,11 +836,11 @@ public class bpnetwork extends network {
 
       } catch (IOException e) {
          System.out.println( "Error -- " + e.toString() );
-         return( networkrec.M_ERROR );
+         return( NetworkRecord.M_ERROR );
       }
 
       /* Return OK */
-      return( networkrec.M_OK );
+      return( NetworkRecord.M_OK );
    }
 
 }

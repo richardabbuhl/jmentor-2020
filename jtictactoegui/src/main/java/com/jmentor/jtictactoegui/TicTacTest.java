@@ -20,7 +20,7 @@ import com.jmentor.jtictactoe.Game;
 import com.jmentor.jtictactoe.Board;
 import com.jmentor.jtictactoe.Minimax;
 
-public class tictactest extends JApplet
+public class TicTacTest extends JApplet
 {
   JButton NewGameButton = new JButton();
   JButton jButton1 = new JButton();
@@ -72,7 +72,7 @@ public class tictactest extends JApplet
       "Random" };
 
 
-  public tictactest()
+  public TicTacTest()
   {
   }
 
@@ -625,7 +625,7 @@ public class tictactest extends JApplet
 
     public static void main(String[] args)
   {
-    tictactest applet = new tictactest();
+    TicTacTest applet = new TicTacTest();
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.getContentPane().add(applet, BorderLayout.CENTER);

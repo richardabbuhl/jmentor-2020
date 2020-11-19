@@ -2,7 +2,7 @@
 
 package com.jmentor.jtictactoe;
 
-import com.jmentor.jbackprop.decimalhelper;
+import com.jmentor.jbackprop.DecimalHelper;
 
 import java.text.DecimalFormat;
 
@@ -13,7 +13,7 @@ public class Game {
    public int Player1_Wins;
    public int Player2_Wins;
 
-   public static DecimalFormat decfmt = decimalhelper.defaultDecimalFormat("#0.00");
+   public static DecimalFormat decfmt = DecimalHelper.defaultDecimalFormat("#0.00");
 
    public Game()
    {
