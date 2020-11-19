@@ -28,3 +28,8 @@ core
 # CVS default ignores end
 /.idea/
 *.iml
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.ipr
+*/*.iml
