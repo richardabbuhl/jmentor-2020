@@ -22,7 +22,6 @@
         <module>jnanoxml</module>
         <module>jbackprop</module>
         <module>jqlearn</module>
-        <module>jrandom</module>
         <module>jtictactoe</module>
         <module>jtictactoegui</module>
     </modules>

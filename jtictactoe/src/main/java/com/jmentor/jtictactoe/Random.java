@@ -2,7 +2,7 @@
 
 package com.jmentor.jtictactoe;
 
-import com.jmentor.jrandom.MersenneTwister;
+import org.apache.commons.math3.random.MersenneTwister;
 
 public class Random extends Player {
 

@@ -5,7 +5,7 @@ package com.jmentor.jqlearn;
 import com.jmentor.jbackprop.DecimalHelper;
 import com.jmentor.jtictactoe.*;
 import com.jmentor.jbackprop.CPUTime;
-import com.jmentor.jrandom.MersenneTwister;
+import org.apache.commons.math3.random.MersenneTwister;
 
 import java.text.DecimalFormat;
 

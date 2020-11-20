@@ -6,7 +6,7 @@ import com.jmentor.jbackprop.DecimalHelper;
 import com.jmentor.jtictactoe.Player;
 import com.jmentor.jtictactoe.Random;
 import com.jmentor.jtictactoe.Board;
-import com.jmentor.jrandom.MersenneTwister;
+import org.apache.commons.math3.random.MersenneTwister;
 
 import java.io.*;
 import java.text.DecimalFormat;
