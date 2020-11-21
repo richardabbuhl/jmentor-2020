@@ -19,7 +19,6 @@
     </properties>
 
     <modules>
-        <module>jnanoxml</module>
         <module>jbackprop</module>
         <module>jqlearn</module>
         <module>jtictactoe</module>

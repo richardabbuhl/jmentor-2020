@@ -12,14 +12,6 @@
     <artifactId>jbackprop</artifactId>
     <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.jmentor</groupId>
-            <artifactId>jnanoxml</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>
