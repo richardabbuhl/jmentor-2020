@@ -2,7 +2,7 @@
 
 package com.jmentor.jqlearn;
 
-import com.jmentor.jbackprop.DecimalHelper;
+import com.jmentor.jtictactoe.DecimalHelper;
 import com.jmentor.jtictactoe.Player;
 import com.jmentor.jtictactoe.Random;
 import com.jmentor.jtictactoe.Board;

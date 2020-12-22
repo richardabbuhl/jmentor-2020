@@ -2,8 +2,6 @@
 
 package com.jmentor.jtictactoe;
 
-import com.jmentor.jbackprop.DecimalHelper;
-
 import java.text.DecimalFormat;
 
 public class Train extends Player {

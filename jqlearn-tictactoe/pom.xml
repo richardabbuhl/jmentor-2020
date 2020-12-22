@@ -9,20 +9,10 @@
         <artifactId>jmentor-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>jqlearn</artifactId>
+    <artifactId>jqlearn-tictactoe</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.jmentor</groupId>
-            <artifactId>jbackprop</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jmentor</groupId>
-            <artifactId>jtictactoe</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>

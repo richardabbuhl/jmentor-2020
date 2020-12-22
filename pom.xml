@@ -20,8 +20,7 @@
 
     <modules>
         <module>jbackprop</module>
-        <module>jqlearn</module>
-        <module>jtictactoe</module>
+        <module>jqlearn-tictactoe</module>
         <module>jtictactoegui</module>
     </modules>
 
